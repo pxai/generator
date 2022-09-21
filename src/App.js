@@ -4,9 +4,10 @@ import generator from './generator';
 
 function App() {
   const [result, setResult] = useState('');
+  const [length, setLength] = useState(8);
 
   const generate = () => {
-    setResult(generator());
+    setResult(generator(length));
   };
 
   return (
@@ -16,9 +17,15 @@ function App() {
       </header>
       <main>
         <div>
-          <button onClick={generate}>Generate!</button>
+          {
+          [4, 8, 12, 15, 20].map((value, i) => {
+            return <button key={i} onClick={() => setLength(value)}>{value}</button>
+          })
+          }
+          <button onClick={generate}>Generate</button>
         </div>
-        <div role="result">
+        <div data-testid="settings">Length: {length}</div>
+        <div data-testid="result">
           {result}
         </div>
       </main>
