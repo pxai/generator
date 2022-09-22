@@ -10,6 +10,15 @@ it('renders the necessary elements', () => {
   const generateButton = screen.getByRole('button', { name: 'Generate'});
   expect(generateButton).toBeInTheDocument();
 
+  const numbersCheckbox = screen.getByLabelText('Numbers')
+  expect(numbersCheckbox).toBeInTheDocument();    
+  
+  const symbolsCheckbox = screen.getByLabelText('Symbols')
+  expect(symbolsCheckbox).toBeInTheDocument();
+
+  const customLength = screen.getByPlaceholderText('Custom length')
+  expect(customLength).toBeInTheDocument();
+
   const resultElement = screen.getByTestId('result');
   expect(resultElement).toBeInTheDocument();
 });
@@ -50,6 +59,19 @@ it('generates a word with configured length', () => {
     expect(button).toBeInTheDocument();
     fireEvent.click(button);
     fireEvent.click(generateButton);
+
     expect(resultElement.innerHTML.length).toBe(value);
   });
+});
+
+it('generates a word with custom length', () => {
+  render(<App />);
+  const generateButton = screen.getByRole('button', { name: 'Generate'});
+  const resultElement = screen.getByTestId('result');
+  const customLength = screen.getByPlaceholderText('Custom length')
+
+  fireEvent.input(customLength, {target: { value: 42 }})
+
+  fireEvent.click(generateButton);
+  expect(resultElement.innerHTML.length).toBe(42);
 });
