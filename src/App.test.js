@@ -21,6 +21,9 @@ it('renders the necessary elements', () => {
 
   const resultElement = screen.getByTestId('result');
   expect(resultElement).toBeInTheDocument();
+
+  const copyButton = screen.getByRole('button', { name: 'Copy password'});
+  expect(copyButton).toBeInTheDocument();
 });
 
 it('changes length configuration', () => {

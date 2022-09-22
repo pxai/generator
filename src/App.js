@@ -28,6 +28,11 @@ function App() {
     setUseSymbols(!useSymbols);
   };
 
+  const copyToClipboard = () => {
+    if (result !== '')
+      navigator.clipboard.writeText(result);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -56,6 +61,9 @@ function App() {
         <div data-testid="settings">Length: {length}</div>
         <div data-testid="result">
           {result}
+        </div>
+        <div>
+          <button onClick={copyToClipboard}>Copy password</button>
         </div>
       </main>
     </div>
